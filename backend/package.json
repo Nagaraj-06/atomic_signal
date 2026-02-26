@@ -9,7 +9,8 @@
   "scripts": {
     "test": "npm run build:ts && tsc -p test/tsconfig.json && c8 node --test -r ts-node/register \"test/**/*.ts\"",
     "start": "npm run build:ts && fastify start -l info dist/app.js",
-    "build:ts": "tsc",
+    "build:ts": "rm -rf dist && tsc",
+		"build": "rm -rf dist && tsc && tsc-alias -p tsconfig.json",
     "watch:ts": "tsc -w",
     "models:sync:dev": "node ./dist/utils/generate_model",
     "dev": "npm run build:ts && concurrently -k -p \"[{name}]\" -n \"TypeScript,App\" -c \"yellow.bold,cyan.bold\" \"npm:watch:ts\" \"npm:dev:start\"",
